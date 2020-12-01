@@ -784,7 +784,7 @@ Score pvSearch(Board* b, Score alpha, Score beta, Depth depth, Depth ply, Thread
                 // if the depth is small enough and we searched enough quiet moves, dont consider this move
                 // **************************************************************************************************
                 if (depth <= 10 && quiets > lmp[isImproving][depth]) {
-                    if (depth<6)moveOrderer.skip = true;
+                    moveOrderer.skip = true;
                     continue;
                 }
                 if (sd->getHistories(m, b->getActivePlayer(), b->getPreviousMove()) < 200-30*(depth*depth)){
