@@ -52,7 +52,7 @@ void initLmr() {
             lmrReductions[d][m] = 0.75+log(d) * log(m) * 100 / LMR_DIV;
 }
 
-int lmp[2][8] = {{0, 2, 3, 4, 6, 8, 13, 18}, {0, 3, 4, 6, 8, 12, 20, 30}};
+int lmp[2][11] = {{0, 2, 3, 4, 6, 8, 13, 18, 24, 30, 36}, {0, 3, 4, 6, 8, 13, 18, 24, 30, 36, 42}};
 
 /**
  * =================================================================================
@@ -783,8 +783,8 @@ Score pvSearch(Board* b, Score alpha, Score beta, Depth depth, Depth ply, Thread
                 // late move pruning:
                 // if the depth is small enough and we searched enough quiet moves, dont consider this move
                 // **************************************************************************************************
-                if (depth <= 7 && quiets > lmp[isImproving][depth]) {
-                    moveOrderer.skip = true;
+                if (depth <= 10 && quiets > lmp[isImproving][depth]) {
+                    if (depth<6)moveOrderer.skip = true;
                     continue;
                 }
                 if (sd->getHistories(m, b->getActivePlayer(), b->getPreviousMove()) < 200-30*(depth*depth)){
